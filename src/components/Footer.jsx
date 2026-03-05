@@ -14,7 +14,7 @@ const Footer = () => {
 
       <div className='content'>
         <p>週四～週一 12:00-20:00</p>
-        <p>台塑公園二巷12號</p>
+        <p>台塑王氏昆仲公園二巷12號</p>
         <p>eriel.gelato@gmail.com</p>
         <p>07-2382899</p>
       </div>
