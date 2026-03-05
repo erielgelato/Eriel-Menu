@@ -1,0 +1,258 @@
+.inner-page {
+  // margin-top: 6vh;
+  margin-left: 14px;
+  margin-right: 14px;
+  border-top: 1px solid #414141;
+  min-height: 80vh;
+  max-width: 100%;
+  font-family: "Noto Sans TC";
+  .content {
+    margin-top: 20px;
+    .inner-head {
+      display: flex;
+      justify-content: flex-start;
+      align-items: stretch; /* ⭐ 關鍵：讓左右等高 */
+      gap: 10px;
+      .img {
+        width: 200px;
+        height: auto;
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+      .text {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* ⭐ 上下貼齊 */
+        align-items: flex-start;
+        .top {
+          letter-spacing: 2px;
+          h1 {
+            font-weight: 400;
+            font-size: 1.5rem;
+          }
+          h2 {
+            font-weight: 400;
+            font-size: 1rem;
+            font-family: "Noto Sans TC";
+          }
+        }
+      }
+      .bottom {
+        p {
+          font-size: 0.9rem;
+          font-family: "Noto Sans TC";
+          letter-spacing: 1.5px;
+          margin-bottom: 0 !important;
+          color: #686868;
+        }
+        .cal {
+        }
+        .hashtag {
+        }
+      }
+    }
+.inner-share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 2rem;
+
+  .share-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    svg {
+      font-size: 20px;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    &.line {
+      color: #444;
+    }
+
+    &.share {
+      color: #444;
+    }
+  }
+}
+
+
+    .inner-body {
+      .describe {
+        margin: 30px 0;
+        letter-spacing: 1px;
+        text-align: justify;
+        P {
+          color: #676767;
+        }
+      }
+      .more-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        color: #414141;
+        .btm-icon {
+          svg {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 10px;
+          }
+        }
+        p {
+          font-size: 1.5rem;
+          letter-spacing: 1.5px;
+        }
+      }
+      .info-img{
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 100px;
+        .kCal-img{
+            width: 300px;
+            height: auto;
+        }
+        .ingr-img{
+            width: 300px;
+            height: auto;
+        }
+      }
+    }
+  }
+  @keyframes breathe {
+  0% { opacity: 0.55; }
+  50% { opacity: 0.95; }
+  100% { opacity: 0.55; }
+}
+
+/* 通用 skeleton */
+.sk {
+  background: #e9e9e9;
+  border-radius: 12px;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+
+/* Header 左圖 */
+.sk-img {
+  width: 200px;
+  height: 200px; /* 先用正方形，視覺更穩 */
+  border-radius: 20px;
+}
+
+/* 右邊文字 */
+.sk-title {
+  width: 180px;
+  height: 22px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.sk-subtitle {
+  width: 140px;
+  height: 16px;
+  border-radius: 999px;
+}
+
+/* bottom 小行 */
+.sk-line {
+  width: 140px;
+  height: 14px;
+  border-radius: 999px;
+  margin-top: 10px;
+}
+.sk-line--short {
+  width: 100px;
+}
+
+/* describe 段落 */
+.sk-paragraph {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  margin: 10px 0;
+}
+.sk-paragraph--short {
+  width: 70%;
+}
+
+/* 中間 icon 圓 */
+.sk-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  margin: 0 auto 10px;
+}
+
+.sk-center-title {
+  width: 220px;
+  height: 18px;
+  border-radius: 999px;
+  margin: 0 auto;
+}
+
+/* 下面兩張圖 */
+.sk-figure {
+  width: 300px;
+  height: 180px;
+  border-radius: 18px;
+}
+
+}
+@media (min-width: 376px) and (max-width: 768px) {
+}
+
+/* ✅ 平板～筆電 */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .inner-header{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      .inner-head{
+        gap: 50px !important;
+      }
+    }
+        .describe{
+          width: 70% !important;
+          display: flex;
+          justify-content: center;
+
+        }
+        .describeA{
+          width: 100% !important;
+          display: flex;
+          justify-content: center;
+        }
+}
+/* ✅ 平板～筆電 */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .sk-img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .sk-figure {
+    width: 340px;
+    height: 200px;
+  }
+}

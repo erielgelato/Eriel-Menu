@@ -1,0 +1,933 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+* {
+  font-family: "Playfair Display", "Noto Sans TC", serif, sans-serif;
+}
+
+.app {
+  overflow: visible;
+}
+
+/* ===== Navbar (未展開時：白 -> 透明 漸層 / 無底線) ===== */
+.navbarEriel {
+  position: relative; /* ✅ 完全不固定 */
+  width: 100%;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  /* ✅ 不要底線：不要 ::after 就好（這裡不寫） */
+  box-shadow: none;
+  /* ✅ 未展開：由上到下全白漸層到全透明 */
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 35%, rgba(255, 255, 255, 0.35) 65%, rgba(255, 255, 255, 0) 100%) !important;
+  background-color: transparent !important;
+  /* ✅ 往下滑：變全白 */
+  /* ✅ 選單展開：透明（維持你原本需求） */
+}
+.navbarEriel.is-scrolled {
+  background: rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255) !important;
+  /* 你如果想要更像「貼住白底」的感覺，可加一點陰影 */
+  /* box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06); */
+}
+.navbarEriel.is-open {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+/* 中間 Logo 真置中 */
+.navbar-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-logoImg {
+  height: 26px;
+  width: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+/* ✅ 漢堡：要有 margin-left */
+.hamburger {
+  width: 40px;
+  height: 40px;
+  margin-left: 28px; /* 你要的 margin-left */
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.hamburger span {
+  width: 18px;
+  height: 2px;
+  background: #111;
+  transition: 0.25s ease;
+}
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 右側空位（不用搜尋但保持視覺平衡） */
+.navbar-rightSpacer {
+  margin-left: auto;
+  width: 40px;
+  height: 40px;
+  margin-right: 28px;
+}
+
+/* ===== Overlay (展開後：整塊白色半透明 / 不漸層) ===== */
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  /* ✅ 展開後：整塊白色半透明，不要漸層 */
+  background: rgba(255, 255, 255, 0.65) !important;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+.menuOverlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Overlay 上方置中關閉漢堡 */
+.overlayHamburger {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.overlayHamburger span {
+  width: 18px;
+  height: 2px;
+  background: #111;
+  transition: 0.25s ease;
+}
+.overlayHamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.overlayHamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.overlayHamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* 選單文字置中（像你截圖） */
+.menuPanel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 26px;
+}
+.menuPanel a {
+  text-decoration: none;
+  color: #111;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  font-weight: 300;
+}
+
+/* ===== RWD ===== */
+@media (max-width: 768px) {
+  .navbarEriel {
+    height: 60px;
+  }
+  .hamburger {
+    margin-left: 18px;
+  }
+  .navbar-rightSpacer {
+    margin-right: 18px;
+  }
+  .navbar-logoImg {
+    height: 24px;
+  }
+  .menuPanel a {
+    font-size: 16px;
+  }
+}
+@media (max-width: 480px) {
+  .hamburger {
+    margin-left: 14px;
+  }
+  .navbar-rightSpacer {
+    margin-right: 14px;
+  }
+}
+.footer {
+  background-color: rgb(38, 37, 37);
+  min-height: 10vh;
+  width: 100%;
+}
+.footer .head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: 20px;
+}
+.footer .head .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.footer .head .logo img {
+  width: 150px;
+  height: auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+.footer .content {
+  color: rgb(183, 183, 183);
+  text-align: center;
+  margin-top: 15px;
+  font-size: 1rem;
+  letter-spacing: 1.5px;
+}
+.footer .content p {
+  margin: 10px 0;
+}
+.footer .copyright {
+  text-align: center;
+  color: rgb(183, 183, 183);
+  margin-top: 10px;
+  padding-bottom: 30px;
+  letter-spacing: 1.5px;
+  font-size: 0.8rem;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer !important;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.back-to-top:hover {
+  opacity: 1;
+}
+.back-to-top.show {
+  opacity: 0.7;
+  pointer-events: auto;
+}
+
+.home-page {
+  position: relative;
+  width: 100%;
+  min-height: 80vh;
+  /* ✅ 要能往下滑就不要 hidden */
+  overflow-x: hidden;
+  overflow-y: auto;
+  /* Header 變成正常區塊：會自然排在 navbar 下方 */
+  /* Swiper 本體 */
+  /* content 自然接在 header 後面，不用 padding-top 推 */
+  /* Header loading block */
+  /* Menu skeleton card */
+}
+.home-page .header {
+  position: relative; /* ✅ 不要 absolute */
+  height: 30vh;
+}
+.home-page .homeSwiper {
+  width: 100%;
+  height: 100%;
+}
+.home-page .homeSwiper img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+}
+.home-page .content {
+  position: relative;
+  z-index: 1;
+  padding: 24px 28px 3vh;
+}
+.home-page .content h1 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 3px;
+  text-align: center;
+  padding-bottom: 3vh;
+}
+.home-page .content .ice-cream-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  justify-items: center;
+}
+.home-page .header-skeleton {
+  width: 100%;
+  height: 100%;
+  border-radius: 0px;
+  background: #e9e9e9;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+.home-page .cream-skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.home-page .cream-skeleton__img {
+  width: 110px;
+  height: 110px;
+  border-radius: 20px;
+  background: #e9e9e9;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+.home-page .cream-skeleton__text {
+  margin-top: 10px;
+  width: 70px;
+  height: 12px;
+  border-radius: 999px;
+  background: #e9e9e9;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+.home-page .menu-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0px 0 50px;
+  flex-wrap: wrap;
+}
+.home-page .menu-filter span {
+  cursor: pointer;
+  font-size: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #f2f2f2;
+  color: #555;
+  transition: all 0.2s ease;
+}
+.home-page .menu-filter span:hover {
+  background: #e6e6e6;
+}
+.home-page .menu-filter span.active {
+  background: #111;
+  color: #fff;
+}
+
+@keyframes breathe {
+  0% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0.55;
+  }
+}
+/* ✅ 小手機 */
+@media (max-width: 375px) {
+  .cream-skeleton__img {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+  }
+}
+/* ✅ 平板～筆電 */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .cream-skeleton__img {
+    width: 200px;
+    height: 200px;
+    border-radius: 24px;
+  }
+}
+/* ✅ 大桌機 */
+@media (min-width: 1201px) {
+  .cream-skeleton__img {
+    width: 170px;
+    height: 170px;
+    border-radius: 28px;
+  }
+}
+.inner-page {
+  margin-left: 14px;
+  margin-right: 14px;
+  border-top: 1px solid #414141;
+  min-height: 80vh;
+  max-width: 100%;
+  font-family: "Noto Sans TC";
+  /* 通用 skeleton */
+  /* Header 左圖 */
+  /* 右邊文字 */
+  /* bottom 小行 */
+  /* describe 段落 */
+  /* 中間 icon 圓 */
+  /* 下面兩張圖 */
+}
+.inner-page .content {
+  margin-top: 20px;
+}
+.inner-page .content .inner-head {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch; /* ⭐ 關鍵：讓左右等高 */
+  gap: 10px;
+}
+.inner-page .content .inner-head .img {
+  width: 200px;
+  height: auto;
+}
+.inner-page .content .inner-head .img img {
+  width: 100%;
+  height: auto;
+}
+.inner-page .content .inner-head .text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* ⭐ 上下貼齊 */
+  align-items: flex-start;
+}
+.inner-page .content .inner-head .text .top {
+  letter-spacing: 2px;
+}
+.inner-page .content .inner-head .text .top h1 {
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+.inner-page .content .inner-head .text .top h2 {
+  font-weight: 400;
+  font-size: 1rem;
+  font-family: "Noto Sans TC";
+}
+.inner-page .content .inner-head .bottom p {
+  font-size: 0.9rem;
+  font-family: "Noto Sans TC";
+  letter-spacing: 1.5px;
+  margin-bottom: 0 !important;
+  color: #686868;
+}
+.inner-page .content .inner-share {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 2rem;
+}
+.inner-page .content .inner-share .share-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.inner-page .content .inner-share .share-btn svg {
+  font-size: 20px;
+}
+.inner-page .content .inner-share .share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+.inner-page .content .inner-share .share-btn.line {
+  color: #444;
+}
+.inner-page .content .inner-share .share-btn.share {
+  color: #444;
+}
+.inner-page .content .inner-body .describe {
+  margin: 30px 0;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+.inner-page .content .inner-body .describe P {
+  color: #676767;
+}
+.inner-page .content .inner-body .more-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  color: #414141;
+}
+.inner-page .content .inner-body .more-info .btm-icon svg {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.inner-page .content .inner-body .more-info p {
+  font-size: 1.5rem;
+  letter-spacing: 1.5px;
+}
+.inner-page .content .inner-body .info-img {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 100px;
+}
+.inner-page .content .inner-body .info-img .kCal-img {
+  width: 300px;
+  height: auto;
+}
+.inner-page .content .inner-body .info-img .ingr-img {
+  width: 300px;
+  height: auto;
+}
+@keyframes breathe {
+  0% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    opacity: 0.55;
+  }
+}
+.inner-page .sk {
+  background: #e9e9e9;
+  border-radius: 12px;
+  animation: breathe 1.4s ease-in-out infinite;
+}
+.inner-page .sk-img {
+  width: 200px;
+  height: 200px; /* 先用正方形，視覺更穩 */
+  border-radius: 20px;
+}
+.inner-page .sk-title {
+  width: 180px;
+  height: 22px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+.inner-page .sk-subtitle {
+  width: 140px;
+  height: 16px;
+  border-radius: 999px;
+}
+.inner-page .sk-line {
+  width: 140px;
+  height: 14px;
+  border-radius: 999px;
+  margin-top: 10px;
+}
+.inner-page .sk-line--short {
+  width: 100px;
+}
+.inner-page .sk-paragraph {
+  width: 100%;
+  height: 14px;
+  border-radius: 999px;
+  margin: 10px 0;
+}
+.inner-page .sk-paragraph--short {
+  width: 70%;
+}
+.inner-page .sk-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  margin: 0 auto 10px;
+}
+.inner-page .sk-center-title {
+  width: 220px;
+  height: 18px;
+  border-radius: 999px;
+  margin: 0 auto;
+}
+.inner-page .sk-figure {
+  width: 300px;
+  height: 180px;
+  border-radius: 18px;
+}
+
+/* ✅ 平板～筆電 */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .inner-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  .inner-header .inner-head {
+    gap: 50px !important;
+  }
+  .describe {
+    width: 70% !important;
+    display: flex;
+    justify-content: center;
+  }
+  .describeA {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+  }
+}
+/* ✅ 平板～筆電 */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .sk-img {
+    width: 220px;
+    height: 220px;
+  }
+  .sk-figure {
+    width: 340px;
+    height: 200px;
+  }
+}
+.about-page {
+  margin-left: 14px;
+  margin-right: 14px;
+  border-top: 1px solid #414141;
+  min-height: 80vh;
+  max-width: 100%;
+  font-family: "Noto Sans TC";
+}
+.about-page .about-title {
+  text-align: center;
+  margin-top: 30px;
+  letter-spacing: 5px;
+  font-size: 1.8rem !important;
+  color: #2b2b2b;
+}
+.about-page .about-header {
+  width: 80%;
+  margin: 30px auto;
+}
+.about-page .about-header img {
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+}
+.about-page .about-content {
+  width: 80%;
+  margin: 30px auto;
+  line-height: 1.8;
+  letter-spacing: 3px;
+  font-size: 1rem;
+  text-align: justify;
+}
+.about-page .about-content p {
+  margin: 5px 0;
+}
+.about-page .about-content .eng {
+  letter-spacing: 1px !important;
+}
+
+.contact-page {
+  min-height: 80vh;
+  max-width: 100%;
+  padding: 56px 18px 64px;
+  border-top: 1px solid #414141;
+  font-family: "Noto Sans TC", sans-serif;
+  color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 背景做一點點層次，不會太花 */
+  /* 主要卡片容器 */
+  /* 小區塊標題 */
+  /* 分隔線 */
+  /* 底部小提示 */
+}
+.contact-page .page-title {
+  margin: 0 0 10px;
+  font-size: 1.8rem !important;
+  letter-spacing: 5px;
+  color: #2b2b2b;
+}
+.contact-page .page-subtitle {
+  margin: 0 0 26px;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #6a6a6a;
+  line-height: 1.7;
+  text-align: center;
+  max-width: 520px;
+}
+.contact-page .contact-card {
+  width: min(680px, 100%);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 22px;
+  padding: 26px 22px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.06);
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.contact-page .section-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: #3a3a3a;
+  text-align: center;
+}
+.contact-page .divider {
+  height: 1px;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.06);
+}
+.contact-page .contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+.contact-page .contact-list li {
+  margin: 0;
+}
+.contact-page .contact-list a,
+.contact-page .contact-list .contact-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fafafa;
+  text-decoration: none;
+  color: #2c2c2c;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+}
+.contact-page .contact-list a:hover,
+.contact-page .contact-list .contact-row:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+}
+.contact-page .contact-list .icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.06);
+  flex: 0 0 auto;
+}
+.contact-page .contact-list .icon {
+  font-size: 1.2rem;
+  color: #2b2b2b;
+}
+.contact-page .contact-list .text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.25;
+  gap: 4px;
+  min-width: 0;
+}
+.contact-page .contact-list .label {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+  color: #6a6a6a;
+}
+.contact-page .contact-list .value {
+  font-size: 1.2rem;
+  letter-spacing: 0.8px;
+  color: #1f1f1f;
+  word-break: break-word;
+}
+.contact-page .hint {
+  margin: 18px 0 0;
+  font-size: 1rem;
+  letter-spacing: 0.8px;
+  color: #7a7a7a;
+  text-align: center;
+}
+
+/* RWD */
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 42px 14px 56px;
+  }
+  .contact-page .page-title {
+    font-size: 1.2rem;
+  }
+  .contact-page .contact-card {
+    border-radius: 18px;
+    padding: 20px 16px;
+  }
+  .contact-page .contact-list {
+    gap: 10px;
+  }
+  .contact-page .contact-list a,
+  .contact-page .contact-list .contact-row {
+    padding: 11px 12px;
+    border-radius: 14px;
+  }
+  .contact-page .contact-list .icon-wrap {
+    width: 38px;
+    height: 38px;
+    border-radius: 13px;
+  }
+  .contact-page .contact-list .value {
+    font-size: 1rem;
+  }
+}
+.notfound-pageA {
+  min-height: 75vh;
+  max-width: 100%;
+  padding: 56px 18px 64px;
+  border-top: 1px solid #414141;
+  color: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.notfound-pageA .notfound-titleA {
+  font-size: 10em;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #3c3c3c;
+}
+.notfound-pageA .notfound-subtitleA {
+  font-size: 1.5em;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #6a6a6a;
+  line-height: 1.7;
+  text-align: center;
+  text-decoration: none;
+  max-width: 520px;
+}
+
+.cream-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.cream-box .image-container {
+  width: 110px;
+  height: 110px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 20px;
+}
+.cream-box .image-container img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  display: block;
+  transition: opacity 0.4s ease;
+}
+.cream-box .image-container .img-hover {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.cream-box p {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.cream-box:hover .img-default {
+  opacity: 0;
+}
+.cream-box:hover .img-hover {
+  opacity: 1;
+}
+
+/* ✅ 小手機 */
+@media (max-width: 375px) {
+  .cream-box .image-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+  }
+  .cream-box p {
+    font-size: 0.8rem;
+  }
+  .ice-cream-menu {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+/* ✅ 一般手機～小平板 */
+@media (min-width: 376px) and (max-width: 767px) {
+  .cream-box .image-container {
+    width: 110px;
+    height: 110px;
+    border-radius: 20px;
+  }
+}
+/* ✅ 平板～筆電 */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .cream-box .image-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 24px;
+  }
+  .cream-box p {
+    font-size: 0.95rem;
+  }
+}
+/* ✅ 大桌機 */
+@media (min-width: 1201px) {
+  .cream-box .image-container {
+    width: 170px;
+    height: 170px;
+    border-radius: 28px;
+  }
+  .cream-box p {
+    font-size: 1rem;
+  }
+}/*# sourceMappingURL=style.css.map */
