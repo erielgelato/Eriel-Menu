@@ -263,6 +263,12 @@
   overflow-y: auto;
   /* Header 變成正常區塊：會自然排在 navbar 下方 */
 }
+.home-page .homeSwiper {
+  --swiper-navigation-color: #ffffff; /* 左右箭頭 */
+  --swiper-pagination-color: #ffffff; /* active 點點 */
+  --swiper-pagination-bullet-inactive-color: #ffffff; /* 未選中點點 */
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+}
 .home-page .header {
   position: relative; /* ✅ 不要 absolute */
   height: 30vh;
