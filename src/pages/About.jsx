@@ -2,7 +2,19 @@ import React from "react";
 import BackToTopButton from "../components/BackToTopButton";
 import PageTitle from "../services/PageTitle";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCards } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/effect-cards";
+
 const About = () => {
+  const slides = [
+    "https://i.meee.com.tw/nGFi156.jpg",
+    "https://i.meee.com.tw/Hnz2SM6.jpg",
+    "https://i.meee.com.tw/F0ce5M5.jpg"
+  ];
+
   return (
     <div className="about-page">
       <PageTitle title="關於我們" />
@@ -26,8 +38,23 @@ const About = () => {
           our flavors and find your favorite! Have a dream flavor in mind? Let
           us know—we’d love to bring your inspiration to life.
         </p>
+        <div className="about-swiper">
+          <Swiper
+            effect={"cards"}
+            grabCursor={true}
+            modules={[EffectCards]}
+            className="mySwiper"
+          >
+            {slides.map((img, index) => (
+              <SwiperSlide key={index}>
+                <img src={img} alt="" />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
-        <BackToTopButton />
+
+      <BackToTopButton />
     </div>
   );
 };

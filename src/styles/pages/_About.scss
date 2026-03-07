@@ -6,36 +6,82 @@
   min-height: 80vh;
   max-width: 100%;
   font-family: "Noto Sans TC";
-  .about-title{
-
+  .about-title {
     text-align: center;
     margin-top: 30px;
     letter-spacing: 5px;
     font-size: 1.8rem !important;
     color: #2b2b2b;
   }
-  .about-header{
+  .about-header {
     width: 80%;
     margin: 30px auto;
-    img{
+    img {
       width: 100%;
       height: auto;
-    border-radius: 30px;
+      border-radius: 30px;
     }
   }
 
-  .about-content{
+  .about-content {
     width: 80%;
     margin: 30px auto;
     line-height: 1.8;
     letter-spacing: 3px;
     font-size: 1rem;
     text-align: justify;
-    p{
-        margin: 5px 0;
+    p {
+      margin: 5px 0;
     }
-    .eng{
-        letter-spacing: 1px !important;
+    .eng {
+      letter-spacing: 1px !important;
+    }
+    /* Swiper */
+    .about-swiper {
+      margin: 30px auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    .mySwiper {
+      width: 280px;
+      aspect-ratio: 9 / 16; // 保持直式比例
+      max-width: 100%;
+    }
+
+    .swiper-slide {
+      border-radius: 20px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+/* Tablet */
+@media (min-width: 768px) {
+  .about-page {
+    .about-content {
+      .mySwiper {
+        width: 340px;
+      }
+    }
+  }
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .about-page {
+    .about-content {
+      .mySwiper {
+        width: 420px;
+      }
     }
   }
 }

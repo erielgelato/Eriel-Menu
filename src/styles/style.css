@@ -22,13 +22,15 @@
   background: linear-gradient(to bottom, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.7) 35%, rgba(255, 255, 255, 0.35) 65%, rgba(255, 255, 255, 0) 100%) !important;
   background-color: transparent !important;
   /* ✅ 往下滑：變全白 */
-  /* ✅ 選單展開：透明（維持你原本需求） */
 }
 .navbarEriel.is-scrolled {
   background: rgb(255, 255, 255) !important;
   background-color: rgb(255, 255, 255) !important;
   /* 你如果想要更像「貼住白底」的感覺，可加一點陰影 */
   /* box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06); */
+}
+.navbarEriel {
+  /* ✅ 選單展開：透明（維持你原本需求） */
 }
 .navbarEriel.is-open {
   background: transparent !important;
@@ -101,8 +103,7 @@
   transition: opacity 0.25s ease;
   /* ✅ 展開後：整塊白色半透明，不要漸層 */
   background: rgba(255, 255, 255, 0.65) !important;
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 .menuOverlay.open {
   opacity: 1;
@@ -261,14 +262,13 @@
   overflow-x: hidden;
   overflow-y: auto;
   /* Header 變成正常區塊：會自然排在 navbar 下方 */
-  /* Swiper 本體 */
-  /* content 自然接在 header 後面，不用 padding-top 推 */
-  /* Header loading block */
-  /* Menu skeleton card */
 }
 .home-page .header {
   position: relative; /* ✅ 不要 absolute */
   height: 30vh;
+}
+.home-page {
+  /* Swiper 本體 */
 }
 .home-page .homeSwiper {
   width: 100%;
@@ -280,6 +280,9 @@
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
+}
+.home-page {
+  /* content 自然接在 header 後面，不用 padding-top 推 */
 }
 .home-page .content {
   position: relative;
@@ -299,12 +302,18 @@
   gap: 10px;
   justify-items: center;
 }
+.home-page {
+  /* Header loading block */
+}
 .home-page .header-skeleton {
   width: 100%;
   height: 100%;
   border-radius: 0px;
   background: #e9e9e9;
   animation: breathe 1.4s ease-in-out infinite;
+}
+.home-page {
+  /* Menu skeleton card */
 }
 .home-page .cream-skeleton {
   display: flex;
@@ -394,13 +403,6 @@
   min-height: 80vh;
   max-width: 100%;
   font-family: "Noto Sans TC";
-  /* 通用 skeleton */
-  /* Header 左圖 */
-  /* 右邊文字 */
-  /* bottom 小行 */
-  /* describe 段落 */
-  /* 中間 icon 圓 */
-  /* 下面兩張圖 */
 }
 .inner-page .content {
   margin-top: 20px;
@@ -530,15 +532,24 @@
     opacity: 0.55;
   }
 }
+.inner-page {
+  /* 通用 skeleton */
+}
 .inner-page .sk {
   background: #e9e9e9;
   border-radius: 12px;
   animation: breathe 1.4s ease-in-out infinite;
 }
+.inner-page {
+  /* Header 左圖 */
+}
 .inner-page .sk-img {
   width: 200px;
   height: 200px; /* 先用正方形，視覺更穩 */
   border-radius: 20px;
+}
+.inner-page {
+  /* 右邊文字 */
 }
 .inner-page .sk-title {
   width: 180px;
@@ -551,6 +562,9 @@
   height: 16px;
   border-radius: 999px;
 }
+.inner-page {
+  /* bottom 小行 */
+}
 .inner-page .sk-line {
   width: 140px;
   height: 14px;
@@ -560,6 +574,9 @@
 .inner-page .sk-line--short {
   width: 100px;
 }
+.inner-page {
+  /* describe 段落 */
+}
 .inner-page .sk-paragraph {
   width: 100%;
   height: 14px;
@@ -568,6 +585,9 @@
 }
 .inner-page .sk-paragraph--short {
   width: 70%;
+}
+.inner-page {
+  /* 中間 icon 圓 */
 }
 .inner-page .sk-circle {
   width: 32px;
@@ -580,6 +600,9 @@
   height: 18px;
   border-radius: 999px;
   margin: 0 auto;
+}
+.inner-page {
+  /* 下面兩張圖 */
 }
 .inner-page .sk-figure {
   width: 300px;
@@ -657,7 +680,45 @@
 .about-page .about-content .eng {
   letter-spacing: 1px !important;
 }
+.about-page .about-content {
+  /* Swiper */
+}
+.about-page .about-content .about-swiper {
+  margin: 30px auto;
+  display: flex;
+  justify-content: center;
+}
+.about-page .about-content .mySwiper {
+  width: 280px;
+  aspect-ratio: 9/16;
+  max-width: 100%;
+}
+.about-page .about-content .swiper-slide {
+  border-radius: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease-in-out;
+}
+.about-page .about-content .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 
+/* Tablet */
+@media (min-width: 768px) {
+  .about-page .about-content .mySwiper {
+    width: 340px;
+  }
+}
+/* Desktop */
+@media (min-width: 1200px) {
+  .about-page .about-content .mySwiper {
+    width: 420px;
+  }
+}
 .contact-page {
   min-height: 80vh;
   max-width: 100%;
@@ -669,10 +730,6 @@
   flex-direction: column;
   align-items: center;
   /* 背景做一點點層次，不會太花 */
-  /* 主要卡片容器 */
-  /* 小區塊標題 */
-  /* 分隔線 */
-  /* 底部小提示 */
 }
 .contact-page .page-title {
   margin: 0 0 10px;
@@ -689,6 +746,9 @@
   text-align: center;
   max-width: 520px;
 }
+.contact-page {
+  /* 主要卡片容器 */
+}
 .contact-page .contact-card {
   width: min(680px, 100%);
   background: rgba(255, 255, 255, 0.82);
@@ -696,11 +756,13 @@
   border-radius: 22px;
   padding: 26px 22px;
   box-shadow: 0 12px 34px rgba(0, 0, 0, 0.06);
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+.contact-page {
+  /* 小區塊標題 */
 }
 .contact-page .section-title {
   margin: 0;
@@ -709,6 +771,9 @@
   letter-spacing: 1.5px;
   color: #3a3a3a;
   text-align: center;
+}
+.contact-page {
+  /* 分隔線 */
 }
 .contact-page .divider {
   height: 1px;
@@ -779,6 +844,9 @@
   letter-spacing: 0.8px;
   color: #1f1f1f;
   word-break: break-word;
+}
+.contact-page {
+  /* 底部小提示 */
 }
 .contact-page .hint {
   margin: 18px 0 0;
